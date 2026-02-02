@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0A84FF" />
+  <title>FY1 Tracker</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="topbar topbarUber">
+    <div class="topLeft">
+      <h1>FY1 Tracker</h1>
+      <p class="subtitle">Local-only • Offline • No cloud</p>
+    </div>
+    <div class="topRight">
+      <button id="privacyBlurBtn" class="iconBtn" type="button" title="Blur">🙈</button>
+      <button id="openDrawerBtn" class="iconBtn" type="button" title="Filters & settings">☰</button>
+    </div>
+  </header>
+
+  <section class="card warning compact">
+    <p><strong>Privacy:</strong> Do <strong>NOT</strong> enter patient names, NHS numbers, DOB, addresses, or identifiable details.</p>
+    <p class="small muted">Use ward/bed + anonymised summary only (e.g. “?CAP day 2”, “AKI improving”).</p>
+  </section>
+
+  <!-- HOME: Unified list -->
+  <main>
+    <section class="card uberCard">
+      <div class="row between">
+        <div class="row" style="flex:1;">
+          <input id="search" class="search uberSearch" type="search" placeholder="Search…" />
+        </div>
+        <button id="doNowBtn" class="btn btn-ghost btn-small" type="button">What now?</button>
+      </div>
+
+      <div class="chipRow" style="margin-top:10px;">
+        <button class="chip" type="button" data-chip="all">All</button>
+        <button class="chip" type="button" data-chip="review">Review</button>
+        <button class="chip" type="button" data-chip="overdue">Overdue</button>
+        <button class="chip" type="button" data-chip="uncalled">Uncalled</button>
+        <button class="chip" type="button" data-chip="bleeps">Bleeps</button>
+        <button class="chip" type="button" data-chip="jobs">Jobs</button>
+      </div>
+
+      <ul id="list" class="list uberList"></ul>
+      <p id="empty" class="muted small" hidden>No items yet — tap + to add a bleep or job.</p>
+    </section>
+  </main>
+
+  <!-- Drawer (Phase 3: progressive disclosure) -->
+  <div id="drawerBackdrop" class="drawerBackdrop" hidden></div>
+  <aside id="drawer" class="drawer" hidden aria-hidden="true">
+    <div class="drawerHeader">
+      <strong>Filters & settings</strong>
+      <button id="closeDrawerBtn" class="iconBtn" type="button" title="Close">✕</button>
+    </div>
+
+    <div class="drawerBody">
+      <label>
+        Filter
+        <select id="filter" class="select">
+          <option value="all" selected>All</option>
+          <option value="open">Open</option>
+          <option value="done">Done</option>
+          <option value="review">Review queue</option>
+          <option value="bleeps">Bleeps only</option>
+          <option value="jobs">Jobs only</option>
+          <option value="uncalled">Uncalled bleeps</option>
+          <option value="overdue">Overdue bleeps</option>
+        </select>
+      </label>
+
+      <label>
+        Sort
+        <select id="sort" class="select">
+          <option value="newest" selected>Newest</option>
+          <option value="triage">Triage → time</option>
+          <option value="priority">Priority view</option>
+        </select>
+      </label>
+
+      <label>
+        Overdue bleep threshold (mins)
+        <input id="overdueMins" type="number" min="1" value="10" />
+      </label>
+
+      <label>
+        Shift preset
+        <select id="shiftPreset" class="select">
+          <option value="day">Day</option>
+          <option value="twilight">Twilight</option>
+          <option value="night">Night</option>
+        </select>
+      </label>
+
+      <div class="row" style="margin-top:10px;">
+        <button id="handoverBtn" class="btn btn-ghost btn-small" type="button">Copy handover</button>
+        <button id="printHandoverBtn" class="btn btn-ghost btn-small" type="button">Print sheet</button>
+      </div>
+
+      <div class="row" style="margin-top:10px;">
+        <a href="scribe.html" target="_blank" rel="noopener" class="btn btn-ghost btn-small"
+           style="text-decoration:none; display:inline-flex; align-items:center;">🚨 Arrest scribe</a>
+        <button id="wipeBtn" class="btn btn-ghost btn-small" type="button">End shift (wipe)</button>
+        <button id="clearAllBtn" class="btn btn-danger btn-small" type="button">Clear all</button>
+      </div>
+
+      <p class="small muted" style="margin-top:12px;">
+        Tip: tap an item to expand actions. Use “⋯” for more.
+      </p>
+    </div>
+  </aside>
+
+  <!-- Floating action button: opens add window -->
+  <button id="fabAdd" class="fab" type="button" aria-label="Add bleep or job">＋</button>
+
+  <footer class="footer small muted">
+    <p>On iPhone: Safari → Share → <strong>Add to Home Screen</strong>.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

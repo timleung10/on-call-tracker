@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0A84FF" />
+  <title>Add — FY1 Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar topbarUber">
+    <div class="topLeft">
+      <h1>Add</h1>
+      <p class="subtitle">Add a bleep or job • Local-only</p>
+    </div>
+    <div class="topRight">
+      <a href="index.html" class="iconBtn" style="text-decoration:none; display:inline-flex; align-items:center;" title="Back">←</a>
+      <button id="closeBtn" class="iconBtn" type="button" title="Close">✕</button>
+    </div>
+  </header>
+
+  <section class="card warning compact">
+    <p><strong>Privacy:</strong> No patient identifiers.</p>
+    <p class="small muted">Ward/bed + anonymised summary only.</p>
+  </section>
+
+  <main class="grid2">
+    <section class="card uberCard">
+      <h2>📟 Log a bleep</h2>
+      <form id="bleepForm" autocomplete="off">
+        <div class="grid">
+          <label>
+            From (ext/bleep) <span class="req">*</span>
+            <input id="bleepFrom" type="text" placeholder="e.g. x5678 / Bleep 1234" required />
+          </label>
+          <label>
+            Location (optional)
+            <input id="bleepLocation" type="text" placeholder="e.g. AMU / Ward 5" />
+          </label>
+        </div>
+
+        <label>
+          Task summary (optional — add after call back)
+          <input id="bleepSummary" type="text" placeholder="Job / task (optional — add after calling back)" />
+        </label>
+
+        <div class="grid">
+          <label>
+            Urgency <span class="req">*</span>
+            <select id="bleepUrgency" required>
+              <option value="red">🔴 Red (Immediate)</option>
+              <option value="amber" selected>🟠 Amber (Soon)</option>
+              <option value="green">🟢 Green (Routine)</option>
+            </select>
+          </label>
+          <label>
+            Time received (optional)
+            <input id="bleepTime" type="datetime-local" />
+          </label>
+        </div>
+
+        <label class="row checkboxRow">
+          <input id="bleepCalledBack" type="checkbox" />
+          Called back?
+        </label>
+
+        <div class="row">
+          <button class="btn btn-primary" type="submit">Add bleep</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card uberCard">
+      <h2>➕ Add a job</h2>
+
+      <div class="row" style="margin-bottom:8px;">
+        <label style="margin:0; flex:1;">
+          Template (optional)
+          <select id="jobTemplate" class="select">
+            <option value="" selected>— None —</option>
+            <option value="bloods">Bloods / Cannula</option>
+            <option value="review">Review patient</option>
+            <option value="imaging">Chase imaging</option>
+            <option value="discharge">Discharge tasks</option>
+          </select>
+        </label>
+      </div>
+
+      <form id="jobForm" autocomplete="off">
+        <div class="grid">
+          <label>
+            Ward <span class="req">*</span>
+            <input id="ward" type="text" placeholder="e.g. AMU" required />
+          </label>
+          <label>
+            Bed (optional)
+            <input id="bed" type="text" placeholder="e.g. 12" />
+          </label>
+        </div>
+
+        <label>
+          Summary (anonymised) <span class="req">*</span>
+          <input id="summary" type="text" placeholder="e.g. ?Sepsis – improving" required />
+        </label>
+
+        <label>
+          Tasks (comma separated) <span class="req">*</span>
+          <input id="tasks" type="text" placeholder="e.g. Repeat U&Es, CXR, Update senior" required />
+        </label>
+
+        <div class="row">
+          <button class="btn btn-primary" type="submit">Add job</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="add.js"></script>
+</body>
+</html>

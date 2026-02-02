@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0A84FF" />
+
+  <title>Arrest Scribe</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div>
+      <h1>🚨 Arrest Scribe</h1>
+      <p class="subtitle">Local-only • No patient identifiers</p>
+    </div>
+    <div class="row">
+      <a href="index.html" class="btn btn-ghost btn-small"
+         style="text-decoration:none; display:inline-flex; align-items:center;">
+        ← Back to tracker
+      </a>
+    </div>
+  </header>
+
+  <section class="card warning">
+    <p><strong>Privacy:</strong> Do <strong>NOT</strong> enter patient names, NHS numbers, DOB, addresses, or identifiable details.</p>
+    <p class="small muted">Use location/team notes only (e.g. “AMU Bay 3”, “ICU outreach present”).</p>
+  </section>
+
+  <section class="card">
+    <div class="row between">
+      <h2>Scribe controls</h2>
+      <div class="row">
+        <button id="scribeStartBtn" class="btn btn-primary btn-small" type="button">Start</button>
+        <button id="scribeStopBtn" class="btn btn-ghost btn-small" type="button" disabled>Stop</button>
+        <button id="scribeResetBtn" class="btn btn-danger btn-small" type="button" disabled>Reset</button>
+      </div>
+    </div>
+
+    <div class="scribeTop">
+      <div>
+        <div class="small muted">Time since start</div>
+        <div id="scribeTimer" class="scribeTimer">00:00</div>
+      </div>
+
+      <div class="scribeMeta">
+        <label>
+          Location (optional)
+          <input id="scribeLocation" type="text" placeholder="e.g. AMU Bay 3" />
+        </label>
+        <label>
+          Team / notes (optional)
+          <input id="scribeTeam" type="text" placeholder="e.g. Med reg, ICU outreach, anaesthetics" />
+        </label>
+      </div>
+    </div>
+
+    <div class="row between" style="margin-top:12px;">
+      <strong>Quick events</strong>
+      <button id="scribeCopyBtn" class="btn btn-ghost btn-small" type="button" disabled>Copy log</button>
+    </div>
+
+    <div class="scribeButtons">
+      <button class="btn btn-ghost" type="button" data-scribe="CPR started">CPR started</button>
+      <button class="btn btn-ghost" type="button" data-scribe="Rhythm check">Rhythm check</button>
+      <button class="btn btn-ghost" type="button" data-scribe="Shock delivered">Shock</button>
+
+      <button class="btn btn-ghost" type="button" data-scribe="Adrenaline given">Adrenaline</button>
+      <button class="btn btn-ghost" type="button" data-scribe="Amiodarone given">Amiodarone</button>
+      <button class="btn btn-ghost" type="button" data-scribe="Airway secured">Airway</button>
+
+      <button class="btn btn-ghost" type="button" data-scribe="ROSC">ROSC</button>
+      <button class="btn btn-ghost" type="button" data-scribe="Pulse check">Pulse check</button>
+      <button class="btn btn-ghost" type="button" data-scribe="Team brief / plan">Team brief</button>
+    </div>
+
+    <form id="scribeForm" autocomplete="off" style="margin-top:12px;">
+      <label>
+        Custom event (optional)
+        <input id="scribeEventText" type="text" placeholder="e.g. CaCl given, VBG taken, PEA noted..." />
+      </label>
+      <div class="row">
+        <button class="btn btn-primary" type="submit">Add event</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Event log</h2>
+    <ul id="scribeLog" class="list" style="margin-top:12px;"></ul>
+    <p id="scribeEmpty" class="muted small" hidden>
+      No events yet. Press <strong>Start</strong> then use quick buttons.
+    </p>
+  </section>
+
+  <script src="scribe.js"></script>
+</body>
+</html>

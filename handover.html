@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0A84FF" />
+  <title>Handover Sheet</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar noPrint">
+    <div>
+      <h1>📄 Handover Sheet</h1>
+      <p class="subtitle">Printable • Local-only • No identifiers</p>
+    </div>
+    <div class="row">
+      <button id="printBtn" class="btn btn-primary btn-small" type="button">Print</button>
+      <button id="copyBtn" class="btn btn-ghost btn-small" type="button">Copy text</button>
+      <a href="index.html" class="btn btn-ghost btn-small"
+         style="text-decoration:none; display:inline-flex; align-items:center;">← Back</a>
+    </div>
+  </header>
+
+  <section class="card warning">
+    <p><strong>Privacy:</strong> Do <strong>NOT</strong> include patient identifiers. This sheet is generated from local entries.</p>
+    <p class="small muted">Use for structured handover; follow your site policy.</p>
+  </section>
+
+  <section class="card">
+    <div class="row between">
+      <h2>Summary</h2>
+      <div class="small muted" id="generatedAt"></div>
+    </div>
+    <div class="metaRow" id="counts"></div>
+    <p class="small muted" id="keyUsed"></p>
+  </section>
+
+  <section class="card">
+    <h2>Uncalled bleeps</h2>
+    <div id="uncalled"></div>
+  </section>
+
+  <section class="card">
+    <h2>Other open bleeps</h2>
+    <div id="called"></div>
+  </section>
+
+  <section class="card">
+    <h2>Open jobs</h2>
+    <div id="jobs"></div>
+  </section>
+
+  <section class="card">
+    <h2>Review queue</h2>
+    <div id="review"></div>
+  </section>
+
+  <footer class="footer small muted">
+    Generated locally • No cloud • Avoid identifiers
+  </footer>
+
+  <script src="handover.js"></script>
+</body>
+</html>
